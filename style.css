@@ -1,0 +1,337 @@
+
+/* CONFIGURAÇÕES GERAIS */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 40px 16px;
+    font-family: Arial, sans-serif;
+    background-color: #808080;
+    color: #000000;
+}
+textarea {
+    resize: none;
+    width: 100%;
+    height: 100px;
+    min-height: 80px;
+    padding: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 14px;
+    outline: none;
+}
+/* Estilização do ícone que finge ser o botão */
+.btn-camera-upload {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Espaço entre o ícone e o texto */
+    width: calc(100% - 24px); /* Segue a largura dos seus outros campos .input-wrap */
+    max-width: 320px; /* Ajuste para o tamanho padrão dos seus cards */
+    padding: 12px;
+    background-color: #f4f4f4; /* Cor de fundo neutra */
+    color: #333; /* Cor do ícone/texto */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: arial;
+    margin-bottom: 15px;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+/* Efeito ao passar o mouse por cima */
+.btn-camera-upload:hover {
+    background-color: #e9e9e9;
+    border-color: #999;
+}
+
+
+/* ÁREA PRINCIPAL */
+.login-screen {
+    width: 100%;
+    max-width: 420px;
+    margin: 40px auto;
+}
+
+/* CARTÃO DE LOGIN */
+.login-card {
+    background-color: #f2f2f2;
+    padding: 30px;
+    border-radius: 14px;
+    border: 1px solid #d0d0d0;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* CABEÇALHO */
+.login-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.login-title {
+    margin: 0;
+    color: #3694d6;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+/* Seletor de tipo de conta */
+.tipo-login {
+    display: flex;
+    width: 100%;
+    padding: 3px;
+    gap: 3px;
+    border: 1px solid #3694d6;
+    border-radius: 7px;
+    background-color: #dcecf8;
+    margin-bottom: 12px;
+}
+
+.btn-tipo-login {
+    flex: 1;
+    padding: 8px 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: transparent;
+    color: #000000;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-tipo-login i {
+    margin-right: 5px;
+}
+
+.btn-tipo-login:hover {
+    background-color: #c5e2f7;
+}
+
+.btn-tipo-login.ativo {
+    background-color: #3694d6;
+    color: #ffffff;
+}
+
+/* Texto descritivo */
+#textoTipoLogin {
+    margin: 0 0 22px;
+    color: #333333;
+    text-align: center;
+    font-size: 13px;
+}
+
+/* FORMULÁRIO */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* CAMPOS */
+.input-wrap {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 46px;
+    padding: 0 12px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    background-color: #ffffff;
+    transition: border-color 0.2s;
+}
+
+.input-wrap:focus-within {
+    border-color: #3694d6;
+}
+
+.input-icon {
+    color: #3694d6;
+    margin-right: 10px;
+}
+
+.input-wrap input {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #000000;
+    font-size: 14px;
+}
+
+.input-wrap input::placeholder {
+    color: #666666;
+}
+
+/* BOTÃO DE MOSTRAR SENHA */
+.btnMostrarSenha {
+    min-height: auto;
+    width: auto;
+    padding: 0 4px;
+    border: none;
+    background: transparent;
+    color: #3694d6;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btnMostrarSenha:hover {
+    background: transparent;
+    color: #2475ad;
+    transform: none;
+}
+
+.btnMostrarSenha:focus {
+    box-shadow: none;
+}
+
+/* BOTÃO ENTRAR */
+.btn-primary {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 8px;
+    background-color: #f58220;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #df6e10;
+}
+
+/* AJUSTES PARA CELULAR */
+@media (max-width: 480px) {
+    body {
+        padding: 20px 12px;
+    }
+
+    .login-screen {
+        margin: 20px auto;
+    }
+
+    .login-card {
+        padding: 22px 18px;
+    }
+
+    .login-title {
+        font-size: 32px;
+    }
+}
+
+/* CADASTROS IJOB */
+.Cadastro_Cliente,
+.Cadastro_Profissional {
+    display: none;
+    width: 100%;
+    max-width: 480px;
+    margin: 40px auto;
+    padding: 35px;
+    box-sizing: border-box;
+    background-color: #f2f2f2;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    font-family: Arial, sans-serif;
+}
+
+/* Títulos */
+.Cadastro_Cliente h1,
+.Cadastro_Profissional h1 {
+    margin: 0 0 28px;
+    color: #3694d6;
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Campos de preenchimento */
+.Cadastro_Cliente input,
+.Cadastro_Profissional input {
+    display: block;
+    width: 100%;
+    height: 48px;
+    margin-bottom: 16px;
+    padding: 0 14px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s,
+                background-color 0.2s;
+}
+
+.Cadastro_Cliente input:focus,
+.Cadastro_Profissional input:focus {
+    border-color: #3694d6;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(54, 148, 214, 0.15);
+}
+
+.Cadastro_Cliente input::placeholder,
+.Cadastro_Profissional input::placeholder {
+    color: #666666;
+}
+
+/* Botões de cadastro */
+.Cadastro_Cliente button,
+.Cadastro_Profissional button {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 8px;
+    background-color: #f58220;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.Cadastro_Cliente button:hover,
+.Cadastro_Profissional button:hover {
+    background-color: #df6e10;
+    transform: translateY(-1px);
+}
+
+/* Botão voltar */
+.Cadastro_Cliente button.btnVoltar,
+.Cadastro_Profissional button.btnVoltar {
+    background-color: #e53935;
+    color: #ffffff;
+}
+
+.Cadastro_Cliente button.btnVoltar:hover,
+.Cadastro_Profissional button.btnVoltar:hover {
+    background-color: #b71c1c;
+}
+
+/* Ajuste para celulares */
+@media (max-width: 520px) {
+    .Cadastro_Cliente,
+    .Cadastro_Profissional {
+        width: calc(100% - 30px);
+        margin: 20px auto;
+        padding: 25px 20px;
+    }
+
+    .Cadastro_Cliente h1,
+    .Cadastro_Profissional h1 {
+        font-size: 22px;
+    }
+}
