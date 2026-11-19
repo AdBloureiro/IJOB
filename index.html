@@ -1,0 +1,144 @@
+  <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IJOB | Plataforma de Serviços</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://googleapis.com" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div align="center">
+<div id="loginOverlay" class="login-screen">
+  <div class="login-card">
+    <div class="login-header">
+
+        <h1 class="login-title">IJOB</h1>
+        </div>
+        <div class="tipo-login" aria-label="Tipo de conta">
+            
+            
+    <button
+        type="button"
+        id="btnCliente"
+        class="btn-tipo-login ativo"
+        aria-pressed="true"
+        onclick="selecionarTipoLogin('cliente')">
+        <i class="fa-solid fa-user"></i>
+        Cliente
+    </button>
+
+    <button
+        type="button"
+        id="btnPrestador"
+        class="btn-tipo-login"
+        aria-pressed="false"
+        onclick="selecionarTipoLogin('prestador')">
+        <i class="fa-solid fa-briefcase"></i>
+        Profissional
+    </button>
+    </div>
+    <p id="textoTipoLogin">Encontre o profissional certo para o seu serviço</p>
+    
+    <div class="login-form">
+      <div class="input-wrap">
+        <span class="input-icon"><i class="fa-solid fa-user"></i></span>
+        <input type="text" id="email" placeholder="E-mail">
+      </div>
+ <div class="input-wrap">
+<span class="input-icon">
+    <i class="fa-solid fa-lock"></i>
+</span>
+
+<input 
+    type="password" 
+    id="senha" 
+    placeholder="Senha">
+
+<button 
+    type="button" 
+    class="btnMostrarSenha" 
+    onclick="mostrarSenha()">
+    <i class="fa-solid fa-eye-slash"></i>
+
+    </button>
+
+</div>
+<button type="button" id="btnLogin" class="btn-primary" onclick="login()">Entrar</button>
+<button type="button" id="btnfirstlogin" class="btn-primary" onclick="firstlogin()">Criar Conta</button>
+    </div>
+  </div>
+</div>
+<div id="Cadastro_Cliente" class="Cadastro_Cliente" style="display: none;">
+    <h1>CADASTRO DO CLIENTE</h1>
+    <input type="text" id="nome_cliente" placeholder="nome completo">
+    <input type="text" id="Email_Cliente" placeholder="E-mail">
+    <input type="text" id="Documento_Cliente" placeholder="CPF ou CNPJ">
+    <input type="text" id="Contato" placeholder="Telefone">
+    <button type="button" id="btnCadastroCliente" class="btn-primary" onclick="cadastrarCliente()">Cadastrar</button>
+    <button type="button" id="btnVoltar" class="btn-secondary" onclick="voltarLogin()">Voltar</button>
+    </div>
+    <div id="Cadastro_Profissional" class="Cadastro_Profissional" style="display: none;">
+    <h1>CADASTRO DO PROFISSIONAL</h1>
+    <input type="text" id="nome_profissional" placeholder="nome completo">
+    <input type="text" id="Email_Profissional" placeholder="E-mail">
+    <input type="text" id="Documento_Profissional" placeholder="CPF ou CNPJ">
+    <input type="text" id="Contato" placeholder="Telefone">
+    <input type="text" id="Servico" placeholder="Serviço a fornecer">
+    <button type="button" id="btnCadastroProfissional" class="btn-primary" onclick="cadastrarProfissional()">Cadastrar</button>
+    <button type="button" id="btnVoltar" class="btn-secondary" onclick="voltarLogin()">Voltar</button>
+    </div>
+    <div id="Pagina_do_Cliente" class="Cadastro_Cliente" style="display: none;">
+    <h1>Bem-vindo, Cliente!</h1>
+    <p>Esta é a página do cliente.</p>
+    <h2>Como podemos te ajudar?</h2>
+    <button type="button" class="btn-primary" onclick="solicitarservico()">Solicitar Serviço</button>
+    <button type="button" class="btn-primary" onclick="Servicossolicitados()">Meus serviços</button>
+    </div>
+<div id="Localizacao" class="Cadastro_Cliente" style="display: none;">
+
+    <h3>Onde o serviço será realizado?</h3>
+
+    <button type="button" id="btnLocal" class="btn-primary" onclick="localizacao()">
+        <i class="fa-solid fa-location-crosshairs"></i>
+        Buscar localização
+    </button>
+
+    <p></p>
+
+    <div class="input-wrap">
+        <i class="fa-solid fa-location-dot"></i>
+        <input type="text" id="enderecoServico" placeholder="Cole aqui o link do endereço">
+    </div>
+    <button type="button" id="btnConfirmarLocalizacao" class="btn-primary" onclick="ConfirmarLocalizacao()">Confirmar Localização</button>
+
+    <p id="resultadoLocalizacao"></p>
+
+</div>
+    <div id="criarservico" class="Cadastro_Cliente" style="display: none;">
+    <h1>Solicitar Serviço</h1>
+    <select class="input-wrap">
+        <option value="">Selecione um serviço</option>
+        <option value="eletricista">Eletricista</option>
+        <option value="encanador">Encanador</option>
+        <option value="pintor">Pintor</option>
+        <option value="jardineiro">Jardineiro</option>
+    </select>
+    <textarea class="input-wrap"  resize="none" placeholder="Comente sobre o serviço a ser realizado..."></textarea>
+<label for="foto-servico" class="btn-camera-upload">
+    <i class="fa-solid fa-camera"></i></label>
+<input type="file" id="foto-servico" accept="image/*" capture="camera" style="display: none;">
+    <button type="button" class="btn-primary">Enviar Solicitação</button>
+</div>
+<div id="Pagina_do_Profissional" class="Pagina_do_Profissional" style="display: none;">
+    <h1>Bem-vindo, Profissional!</h1>
+    <p>Esta é a página do profissional.</p>
+</div>
+
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
