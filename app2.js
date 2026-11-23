@@ -292,9 +292,8 @@ app.post('/solicitacoes', (req, res, next) => {
     }
 });
 const PORT = process.env.PORT || 5000;
-app.listen(5000, () => {
-  console.log("===============================================");
-  console.log("SEU SITE ESTÁ ONLINE!");
-  console.log("Acesse: http://localhost:5000");
-  console.log("===============================================");
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log("IJOB está online!");
+  console.log(`Servidor iniciado na porta ${PORT}`);
 });
