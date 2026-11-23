@@ -8,7 +8,7 @@ const crypto = require('crypto');
 const app = express();
 
 //caminho dos arquivos
-const PastaPublica = path.join(__dirname, 'public/programa2');
+const PastaPublica = path.join(__dirname, 'public');
 const PastaDados = path.join(PastaPublica, 'dados');
 const ArquivoUsuarios = path.join(PastaDados, 'usuarios.json');
 const ArquivoSolicitacoes = path.join(PastaDados, 'solicitacoes.json');
