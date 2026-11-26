@@ -6,7 +6,23 @@ const multer = require('multer');
 const crypto = require('crypto');
 const {Pool} = require('pg'); 
 const app = express();
+// Conexão com o banco de dados Neon
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
 
+// Testa a conexão com o PostgreSQL
+pool.query('SELECT NOW()')
+    .then(resultado => {
+        console.log('Conexão com Neon realizada com sucesso!');
+        console.log('Horário do banco:', resultado.rows[0].now);
+    })
+    .catch(erro => {
+        console.error('Erro ao conectar com Neon:', erro.message);
+    });
 //caminho dos arquivos
 const PastaPublica = path.join(__dirname, 'public');
 const PastaDados = path.join(PastaPublica, 'dados');
