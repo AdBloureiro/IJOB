@@ -4,7 +4,7 @@ const fs = require('fs');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const crypto = require('crypto');
-
+const {Pool} = require('pg'); 
 const app = express();
 
 //caminho dos arquivos
