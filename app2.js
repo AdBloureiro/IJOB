@@ -107,6 +107,7 @@ function salvarSolicitacoes(solicitacoes) {
         'utf8'
     );
 }
+
 // Cadastro de cliente ou profissional
 app.post('/cadastrar', async (req, res) => {
     try {
@@ -120,6 +121,7 @@ app.post('/cadastrar', async (req, res) => {
             servico
         } = req.body;
 
+        // Validação dos campos obrigatórios
         if (
             !['cliente', 'prestador'].includes(tipo) ||
             !nome?.trim() ||
@@ -133,59 +135,64 @@ app.post('/cadastrar', async (req, res) => {
             });
         }
 
+        // Validação do serviço do profissional
         if (tipo === 'prestador' && !servico?.trim()) {
             return res.status(400).json({
                 mensagem: 'Informe o serviço oferecido.'
             });
         }
 
+        // Validação da senha
         if (senha.length < 8) {
             return res.status(400).json({
                 mensagem: 'A senha deve ter pelo menos 8 caracteres.'
             });
         }
 
-        const usuarios = lerUsuarios();
+        // Normaliza o e-mail
         const emailNormalizado = email.trim().toLowerCase();
 
-        const existente = usuarios.some(
-            usuario => usuario.email === emailNormalizado
+        // Criptografa a senha com bcrypt
+        const senhaHash = await bcrypt.hash(senha, 12);
+
+        // Salva o usuário diretamente no Neon
+        const resultado = await pool.query(
+            `INSERT INTO usuarios
+            (tipo, nome, email, senha, documento, contato, servico)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            RETURNING id`,
+            [
+                tipo,
+                nome.trim(),
+                emailNormalizado,
+                senhaHash,
+                documento.trim(),
+                contato.trim(),
+                tipo === 'prestador' ? servico.trim() : null
+            ]
         );
 
-        if (existente) {
+        return res.status(201).json({
+            mensagem: 'Cadastro realizado com sucesso!',
+            id: resultado.rows[0].id
+        });
+
+    } catch (erro) {
+        console.error('Erro ao cadastrar:', erro);
+
+        // Verifica se o e-mail já existe
+        if (erro.code === '23505') {
             return res.status(409).json({
                 mensagem: 'Este e-mail já está cadastrado.'
             });
         }
-
-        const senhaHash = await bcrypt.hash(senha, 12);
-
-        const novoUsuario = {
-            id: require('crypto').randomUUID(),
-            tipo,
-            nome: nome.trim(),
-            email: emailNormalizado,
-            senhaHash,
-            documento: documento.trim(),
-            contato: contato.trim(),
-            servico: tipo === 'prestador' ? servico.trim() : null,
-            criadoEm: new Date().toISOString()
-        };
-
-        usuarios.push(novoUsuario);
-        salvarUsuarios(usuarios);
-
-        return res.status(201).json({
-            mensagem: 'Cadastro realizado com sucesso!'
-        });
-    } catch (erro) {
-        console.error('Erro ao cadastrar:', erro);
 
         return res.status(500).json({
             mensagem: 'Não foi possível concluir o cadastro.'
         });
     }
 });
+
 
 // Validação do login
 app.post('/login', async (req, res) => {
